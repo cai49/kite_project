@@ -23,4 +23,5 @@ def on_close():
 ui.actionQuit.triggered.connect(on_close)
 ui.item_add_button.clicked.connect(on_add_button_clicked)
 
+
 sys.exit(app.exec())
