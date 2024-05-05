@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated&#10;- Added libraries to the venv" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,6 +25,7 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -154,7 +153,7 @@
       <workItem from="1714380571659" duration="31000" />
       <workItem from="1714380682172" duration="3914000" />
       <workItem from="1714438373125" duration="882000" />
-      <workItem from="1714923244170" duration="2552000" />
+      <workItem from="1714923244170" duration="3137000" />
     </task>
     <task id="LOCAL-00001" summary="Project Creation&#10;- Created main.py which runs the test UI QT app add_items.ui&#10;- Compiled add_items.ui to a python module add_items.py">
       <option name="closed" value="true" />
@@ -212,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714384860493</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated&#10;- Added libraries to the venv">
+      <option name="closed" value="true" />
+      <created>1714931858669</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1714931858669</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,7 +256,8 @@
     <MESSAGE value="Added content&#10;- Added Remove Item button&#10;Improved content&#10;- Intelligent Add Item behaviour, now adds based on context&#10;- Intelligent Remove Item behaviour, now removes based on context" />
     <MESSAGE value="Updated links.md" />
     <MESSAGE value="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation" />
+    <MESSAGE value="Updated&#10;- Added libraries to the venv" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated&#10;- Added libraries to the venv" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kite_project_proto$add_items.coverage" NAME="add_items Coverage Results" MODIFIED="1714202580588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/qtUi" />

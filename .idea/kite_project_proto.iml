@@ -7,6 +7,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/rpi5" />
+      <excludeFolder url="file://$MODULE_DIR$/arduino" />
+      <excludeFolder url="file://$MODULE_DIR$/res" />
+      <excludeFolder url="file://$MODULE_DIR$/tests" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
