@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated&#10;- Added Wait button&#10;- Added key shortcuts">
-      <change beforePath="$PROJECT_DIR$/.idea/kite_project_proto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kite_project_proto.iml" afterDir="false" />
+    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qtUi/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/qtUi/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qtUi/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/qtUi/main_window.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,22 +51,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Python.add_items.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;proto&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Python.add_items.executor": "Run",
+    "Python.main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "proto",
+    "ignore.virus.scanning.warn.message": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "ssh.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\CAI_4\Projects\Python\kite_project_proto" />
@@ -133,8 +130,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
-        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PY-241.15989.155" />
+        <option value="bundled-python-sdk-babbdf50b680-7c6932dee5e4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.15989.155" />
       </set>
     </attachedChunks>
   </component>
@@ -155,7 +152,9 @@
       <workItem from="1714223250401" duration="64000" />
       <workItem from="1714288374949" duration="20776000" />
       <workItem from="1714380571659" duration="31000" />
-      <workItem from="1714380682172" duration="658000" />
+      <workItem from="1714380682172" duration="3914000" />
+      <workItem from="1714438373125" duration="882000" />
+      <workItem from="1714923244170" duration="2552000" />
     </task>
     <task id="LOCAL-00001" summary="Project Creation&#10;- Created main.py which runs the test UI QT app add_items.ui&#10;- Compiled add_items.ui to a python module add_items.py">
       <option name="closed" value="true" />
@@ -205,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714223296043</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation">
+      <option name="closed" value="true" />
+      <created>1714384860493</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714384860493</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,10 +248,11 @@
     <MESSAGE value="Created Resources Folder&#10;- Added links.md for the different urls that are useful for the project" />
     <MESSAGE value="Added content&#10;- Added Remove Item button&#10;Improved content&#10;- Intelligent Add Item behaviour, now adds based on context&#10;- Intelligent Remove Item behaviour, now removes based on context" />
     <MESSAGE value="Updated links.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated links.md" />
+    <MESSAGE value="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated&#10;- Added project icon&#10;- Added save / load infrastructure, just needs the implementation" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kite_project_proto$add_items.coverage" NAME="add_items Coverage Results" MODIFIED="1714202580588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/qtUi" />
-    <SUITE FILE_PATH="coverage/kite_project_proto$main.coverage" NAME="main Coverage Results" MODIFIED="1714381222776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/kite_project_proto$main.coverage" NAME="main Coverage Results" MODIFIED="1714931325784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
