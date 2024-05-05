@@ -1,3 +1,5 @@
+import serial
+import time
 import paho.mqtt.client as mqtt
 
 default_topic = "default.channel"
@@ -8,6 +10,10 @@ wait_directive_topic = "directive.wait"
 locate_directive_topic = "directive.locate"
 end_directive_topic = "directive.end"
 
+serial = serial.Serial('/dev/ttyACM0', 115200, timeout=1.0)
+time.sleep(0.1)
+serial.reset_input_buffer()
+print("Serial OK")
 
 def on_connect(client, userdata, flags, rc):
     print(f"Connected with result code {rc}")
@@ -59,6 +65,10 @@ def process_default(payload):
 
     if "#DISCONNECT" in payload:
         client.disconnect()
+        print("Successfully Disconnected from Client")
+
+        serial.close()
+        print("Successfully Closed Serial COM")
 
 
 def process_linear_rotation(payload):
@@ -76,9 +86,25 @@ def process_wait_directive(payload):
 def process_locate_directive(payload):
     print(f"Processed locate directive: {payload}")
 
+    serial.write(f"{payload}\n".encode('utf-8'))
+
+    while serial.in_waiting <= 0:
+        time.sleep(0.01)
+
+    answer = serial.readline().decode('utf-8').rstrip()
+    print(answer)
+
 
 def process_end_directice(payload):
     print(f"Processed end directive: {payload}")
+
+    serial.write(f"{payload}\n".encode('utf-8'))
+
+    while serial.in_waiting <= 0:
+        time.sleep(0.01)
+
+    answer = serial.readline().decode('utf-8').rstrip()
+    print(answer)
 
 
 try:
