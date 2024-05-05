@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated links.md">
-      <change afterPath="$PROJECT_DIR$/icons/led_green.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/led_red.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qtUi/connection_wizard.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/qtUi/connection_wizard.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/compiling_ui.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/mosquitto_utils.md" afterDir="false" />
+    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated&#10;- Added Wait button&#10;- Added key shortcuts">
+      <change beforePath="$PROJECT_DIR$/.idea/kite_project_proto.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/kite_project_proto.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qtUi/add_items.py" beforeDir="false" afterPath="$PROJECT_DIR$/qtUi/main_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qtUi/add_items.ui" beforeDir="false" afterPath="$PROJECT_DIR$/qtUi/main_window.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/links.md" beforeDir="false" afterPath="$PROJECT_DIR$/res/links.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qtUi/main_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/qtUi/main_window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qtUi/main_window.ui" beforeDir="false" afterPath="$PROJECT_DIR$/qtUi/main_window.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +30,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -159,6 +154,8 @@
       <workItem from="1714217339956" duration="5825000" />
       <workItem from="1714223250401" duration="64000" />
       <workItem from="1714288374949" duration="20776000" />
+      <workItem from="1714380571659" duration="31000" />
+      <workItem from="1714380682172" duration="658000" />
     </task>
     <task id="LOCAL-00001" summary="Project Creation&#10;- Created main.py which runs the test UI QT app add_items.ui&#10;- Compiled add_items.ui to a python module add_items.py">
       <option name="closed" value="true" />
@@ -248,6 +245,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kite_project_proto$add_items.coverage" NAME="add_items Coverage Results" MODIFIED="1714202580588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/qtUi" />
-    <SUITE FILE_PATH="coverage/kite_project_proto$main.coverage" NAME="main Coverage Results" MODIFIED="1714308455463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/kite_project_proto$main.coverage" NAME="main Coverage Results" MODIFIED="1714381222776" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

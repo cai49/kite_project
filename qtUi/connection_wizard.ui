@@ -37,6 +37,10 @@
   <property name="windowTitle">
    <string>Communication Wizard</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icons/icon_no_letters.png</normaloff>../icons/icon_no_letters.png</iconset>
+  </property>
   <widget class="QLabel" name="icon_connection_status">
    <property name="geometry">
     <rect>
