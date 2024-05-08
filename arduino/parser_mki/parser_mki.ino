@@ -12,6 +12,7 @@ void setup() {
 void loop() {
   if (Serial.available() > 0) {
     msg = Serial.readStringUntil('\n');
+    int waitlength=msg.length()-1;
     Serial.println("Received message: " + msg);
 
     if (msg == "LOCATE") {
@@ -24,7 +25,7 @@ void loop() {
     {
       String directiva = msg.substring(0,3);
       if(directiva=="WAIT"){
-        String parametro_letra = msg.substring(5,7);
+        String parametro_letra = msg.substring(5,waitlength);
         int parametro_num =  parametro_letra.toInt();
 
         if(parametro_num!=0){
