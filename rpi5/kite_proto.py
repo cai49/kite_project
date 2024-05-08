@@ -15,6 +15,7 @@ time.sleep(0.1)
 serial.reset_input_buffer()
 print("Serial OK")
 
+
 def on_connect(client, userdata, flags, rc):
     print(f"Connected with result code {rc}")
     client.subscribe(default_topic)
@@ -42,7 +43,7 @@ def on_message(client, userdata, msg):
     elif topic == locate_directive_topic:
         process_locate_directive(payload)
     elif topic == end_directive_topic:
-        process_end_directice(payload)
+        process_end_directive(payload)
     else:
         print(f"Topic not found! {topic}")
 
@@ -74,13 +75,37 @@ def process_default(payload):
 def process_linear_rotation(payload):
     print(f"Processed linear rotation: {payload}")
 
+    serial.write(f"{payload}\n".encode('utf-8'))
+
+    while serial.in_waiting <= 0:
+        time.sleep(0.01)
+
+    answer = serial.readline().decode('utf-8').rstrip()
+    print(answer)
+
 
 def process_linear_motion(payload):
     print(f"Processed linear motion: {payload}")
 
+    serial.write(f"{payload}\n".encode('utf-8'))
+
+    while serial.in_waiting <= 0:
+        time.sleep(0.01)
+
+    answer = serial.readline().decode('utf-8').rstrip()
+    print(answer)
+
 
 def process_wait_directive(payload):
     print(f"Processed wait directive with parameter: {payload}")
+
+    serial.write(f"{payload}\n".encode('utf-8'))
+
+    while serial.in_waiting <= 0:
+        time.sleep(0.01)
+
+    answer = serial.readline().decode('utf-8').rstrip()
+    print(answer)
 
 
 def process_locate_directive(payload):
@@ -95,7 +120,7 @@ def process_locate_directive(payload):
     print(answer)
 
 
-def process_end_directice(payload):
+def process_end_directive(payload):
     print(f"Processed end directive: {payload}")
 
     serial.write(f"{payload}\n".encode('utf-8'))
