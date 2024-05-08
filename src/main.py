@@ -28,7 +28,8 @@ MainWindow.show()
 uiComWiz = ui_wizard_com.Ui_ConnectionWizard()
 uiComWiz.setupUi(ConnectionWizard)
 
-mqtt_broker_address = "192.168.1.184"
+# mqtt_broker_address = "192.168.1.184"
+mqtt_broker_address = "10.1.9.145"
 default_topic = "default.channel"
 
 linear_rotation_topic = "move.linear.rotate"
