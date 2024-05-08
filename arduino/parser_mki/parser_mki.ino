@@ -20,5 +20,20 @@ void loop() {
     else if (msg == "END") {
       digitalWrite(LED, LOW);
     }
+    else 
+    {
+      String directiva = msg.substring(0,3);
+      if(directiva=="WAIT"){
+        String parametro_letra = msg.substring(5,7);
+        int parametro_num =  parametro_letra.toInt();
+
+        if(parametro_num!=0){
+          delay(parametro_num);
+        }
+        else{
+          Serial.println("Received wait directive: " + parametro_letra);
+        }
+      }
+    }
   }
 }
