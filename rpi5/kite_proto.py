@@ -134,5 +134,5 @@ def process_end_directive(payload):
 
 try:
     client.loop_forever()
-except:
+finally:
     print("Something Happened Connecting to the Broker!")
