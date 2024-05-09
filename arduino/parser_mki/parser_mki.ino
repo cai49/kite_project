@@ -1,4 +1,19 @@
+#define debug_flag 0
+
+#if debug_flag
+   #define debug_begin(x)   Serial.begin(x)
+   #define debug(x)         Serial.print(x)
+   #define debugln(x)       Serial.println(x)
+#else
+   #define debug_begin(x)
+   #define debug(x)
+   #define debugln(x)
+#endif
+
 #define LED 13
+
+const String wait_directive = "WAIT";
+const String rotate_directive = "ROTATE";
 
 String msg = "";
 
@@ -11,30 +26,60 @@ void setup() {
 
 void loop() {
   if (Serial.available() > 0) {
+    debugln(Serial.readString());
     msg = Serial.readStringUntil('\n');
-    int waitlength=msg.length()-1;
-    Serial.println("Received message: " + msg);
 
-    if (msg == "LOCATE") {
+    int end_string = msg.length();
+
+    if (msg == "LOCATE") 
+    {
       digitalWrite(LED, HIGH);
     }
-    else if (msg == "END") {
+    else if (msg == "END") 
+    {
+      digitalWrite(LED, LOW);
+    }
+    else if (msg == "FORWARD")
+    {
+      digitalWrite(LED, HIGH);
+      delay(100);
       digitalWrite(LED, LOW);
     }
     else 
     {
-      String directiva = msg.substring(0,3);
-      if(directiva=="WAIT"){
-        String parametro_letra = msg.substring(5,waitlength);
-        int parametro_num =  parametro_letra.toInt();
+      if(wait_directive == msg.substring(0, wait_directive.length()))
+      {
+        String station = msg.substring(wait_directive.length()+1, end_string);
+        int wait_time =  station.toInt();
 
-        if(parametro_num!=0){
-          delay(parametro_num);
+        debugln("Parametro: " + station);
+        debugln("Numero: " + String(wait_time));
+
+        if(wait_time!=0)
+        {
+          delay(wait_time);
         }
-        else{
-          Serial.println("Received wait directive: " + parametro_letra);
+        else
+        {
+          debugln("Received wait directive: " + station);
+        }
+      }
+      else if (rotate_directive == msg.substring(0, rotate_directive.length()))
+      {
+        String direction = msg.substring(rotate_directive.length()+1, end_string);
+
+        if (direction == "RIGHT") 
+        {
+          debugln("Turning Right!");
+        }
+        else 
+        {
+          debugln("Turning Left!");
         }
       }
     }
+
+    Serial.println("Processed message: " + msg);
+    delay(100);
   }
 }
