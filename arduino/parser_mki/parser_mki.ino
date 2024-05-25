@@ -18,11 +18,18 @@ const String set_speed_directive = "SPEED";
 
 String msg = "";
 
-const int FAST = 100;
-const int NOM = 50;
-const int SLOW = 25;
+const int RIGHT = 0;
+const int LEFT = 1;
 
+const int FAST = 100;
+const int NOM = 75;
+const int SLOW = 25;
+const int STOP = 0;
 int drive_speed = NOM;
+
+const int IDLE = 0;
+const int DRIVE = 1;
+int state = IDLE;
 
 void setup() {
   Serial.begin(115200);
@@ -45,12 +52,11 @@ void loop() {
     else if (msg == "END") 
     {
       digitalWrite(LED, LOW);
+      state = IDLE;
     }
     else if (msg == "FORWARD")
     {
-      digitalWrite(LED, HIGH);
-      delay(100);
-      digitalWrite(LED, LOW);
+      state = DRIVE;
     }
     else 
     {
@@ -78,10 +84,12 @@ void loop() {
         if (direction == "RIGHT") 
         {
           debugln("Turning Right!");
+          rotate(RIGHT);
         }
         else
         {
           debugln("Turning Left!");
+          rotate(LEFT);
         }
       }
       else if (set_speed_directive == msg.substring(0, set_speed_directive.length()))
@@ -106,4 +114,23 @@ void loop() {
     Serial.println("Processed message: " + msg);
     delay(100);
   }
+}
+
+void drive_state()
+{
+  digitalWrite(LED, HIGH);
+  delay(100);
+  digitalWrite(LED, LOW);
+}
+
+void rotate(int dir)
+{
+    if (dir == RIGHT)
+    {
+      
+    }
+    else if (dir == LEFT)
+    {
+      
+    }
 }
