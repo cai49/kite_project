@@ -70,6 +70,19 @@ def process_default(payload):
 
         serial.close()
         print("Successfully Closed Serial COM")
+    
+    if "#SET" in payload:
+        if "SPEED" in payload:
+            sub_payload = payload.replace("#SET SPEED ", "")
+            print(f"Setting speed to: {sub_payload}")
+
+            serial.write(f"SPEED {sub_payload}\n".encode('utf-8'))
+
+            while serial.in_waiting <= 0:
+                time.sleep(0.01)
+
+            answer = serial.readline().decode('utf-8').rstrip()
+            print(answer)
 
 
 def process_linear_rotation(payload):

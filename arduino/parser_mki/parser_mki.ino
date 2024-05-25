@@ -14,8 +14,15 @@
 
 const String wait_directive = "WAIT";
 const String rotate_directive = "ROTATE";
+const String set_speed_directive = "SPEED";
 
 String msg = "";
+
+const int FAST = 100;
+const int NOM = 50;
+const int SLOW = 25;
+
+int drive_speed = NOM;
 
 void setup() {
   Serial.begin(115200);
@@ -72,9 +79,26 @@ void loop() {
         {
           debugln("Turning Right!");
         }
-        else 
+        else
         {
           debugln("Turning Left!");
+        }
+      }
+      else if (set_speed_directive == msg.substring(0, set_speed_directive.length()))
+      {
+        String new_speed = msg.substring(set_speed_directive.length()+1, end_string);
+
+        if (new_speed == "FAST")
+        {
+          drive_speed = FAST;
+        }
+        else if (new_speed == "NOM")
+        {
+          drive_speed = NOM;
+        }
+        else if (new_speed == "SLOW")
+        {
+          drive_speed = SLOW;
         }
       }
     }
