@@ -3,6 +3,7 @@ Created By: Ismael Castro
 """
 
 import sys
+import time
 
 # PyQt6
 from PyQt6.QtGui import QPixmap
@@ -28,8 +29,8 @@ MainWindow.show()
 uiComWiz = ui_wizard_com.Ui_ConnectionWizard()
 uiComWiz.setupUi(ConnectionWizard)
 
-# mqtt_broker_address = "192.168.1.184"
-mqtt_broker_address = "10.1.9.145"
+mqtt_broker_address = "192.168.1.184"
+# mqtt_broker_address = "10.1.9.145"
 default_topic = "default.channel"
 
 linear_rotation_topic = "move.linear.rotate"
@@ -216,6 +217,7 @@ def on_package_send():
     if package:
         try:
             publish.multiple(package, hostname=mqtt_broker_address)
+            time.sleep(1)
         except Exception as e:
             print(f"Failed sending package! {e}, check the connection!")
 
