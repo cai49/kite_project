@@ -10,7 +10,7 @@ wait_directive_topic = "directive.wait"
 locate_directive_topic = "directive.locate"
 end_directive_topic = "directive.end"
 
-serial = serial.Serial('/dev/ttyACM0', 115200, timeout=1.0)
+serial = serial.Serial('/dev/ttyUSB0', 115200, timeout=1.0)
 time.sleep(0.1)
 serial.reset_input_buffer()
 print("Serial OK")
