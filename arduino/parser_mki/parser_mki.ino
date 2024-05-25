@@ -1,3 +1,4 @@
+// Debug 
 #define debug_flag 0
 
 #if debug_flag
@@ -10,23 +11,41 @@
    #define debugln(x)
 #endif
 
-#define LED 13
+// Motor Driver
+const int m1_pulse_pin = 8;
+const int m1_direction_pin = 9;
+const int m1_enable_pin = 10;
 
+const int m2_pulse_pin = 11;
+const int m2_direction_pin = 12;
+const int m2_enable_pin = 13;
+
+const int DV_MUX = 500;
+
+// Serial Directives
 const String wait_directive = "WAIT";
 const String rotate_directive = "ROTATE";
 const String set_speed_directive = "SPEED";
 
 String msg = "";
 
+// Direction Constants
 const int RIGHT = 0;
 const int LEFT = 1;
 
-const int FAST = 100;
-const int NOM = 75;
-const int SLOW = 25;
+const int REVERSE = 0;
+const int FORWARD = 1;
+
+int direction = FORWARD;
+
+// Speed Control
+const int FAST = 200;
+const int NOM = 125;
+const int SLOW = 75;
 const int STOP = 0;
 int drive_speed = NOM;
 
+// Simple State Machine
 const int IDLE = 0;
 const int DRIVE = 1;
 int state = IDLE;
@@ -35,7 +54,13 @@ void setup() {
   Serial.begin(115200);
   while(!Serial) {}
 
-  pinMode(LED, OUTPUT);
+  pinMode(m1_direction_pin, OUTPUT);
+  pinMode(m1_enable_pin, OUTPUT);
+  pinMode(m1_pulse_pin, OUTPUT);
+
+  pinMode(m2_direction_pin, OUTPUT);
+  pinMode(m2_enable_pin, OUTPUT);
+  pinMode(m2_pulse_pin, OUTPUT);
 }
 
 void loop() {
@@ -47,16 +72,16 @@ void loop() {
 
     if (msg == "LOCATE") 
     {
-      digitalWrite(LED, HIGH);
+      state = IDLE;
     }
     else if (msg == "END") 
     {
-      digitalWrite(LED, LOW);
       state = IDLE;
     }
     else if (msg == "FORWARD")
     {
       state = DRIVE;
+      direction = FORWARD;
     }
     else 
     {
@@ -114,13 +139,43 @@ void loop() {
     Serial.println("Processed message: " + msg);
     delay(100);
   }
+
+  switch (state) 
+  {
+    case DRIVE:
+      drive_state();
+      break;
+    case IDLE:
+      digitalWrite(m1_enable_pin, LOW);
+      digitalWrite(m1_pulse_pin, LOW);
+
+      digitalWrite(m2_enable_pin, LOW);
+      digitalWrite(m2_pulse_pin, LOW);
+      break;
+  }
 }
 
 void drive_state()
 {
-  digitalWrite(LED, HIGH);
-  delay(100);
-  digitalWrite(LED, LOW);
+  // digitalWrite(LED, HIGH);
+  // delay(100);
+  // digitalWrite(LED, LOW);
+
+  for (int i = 0; i < drive_speed; i++)
+  {
+    digitalWrite(m1_direction_pin, direction);
+    digitalWrite(m1_enable_pin, HIGH);
+    digitalWrite(m1_pulse_pin, HIGH);
+
+    digitalWrite(m2_direction_pin, direction);
+    digitalWrite(m2_enable_pin, HIGH);
+    digitalWrite(m2_pulse_pin, HIGH);
+    delayMicroseconds(DV_MUX);
+
+    digitalWrite(m1_pulse_pin, LOW);
+    digitalWrite(m2_pulse_pin, LOW);
+    delayMicroseconds(DV_MUX);
+  }
 }
 
 void rotate(int dir)
