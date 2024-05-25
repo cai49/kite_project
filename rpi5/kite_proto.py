@@ -75,7 +75,7 @@ def process_default(payload):
 def process_linear_rotation(payload):
     print(f"Processed linear rotation: {payload}")
 
-    serial.write(f"{payload}\n".encode('utf-8'))
+    serial.write(f"ROTATE|{payload}\n".encode('utf-8'))
 
     while serial.in_waiting <= 0:
         time.sleep(0.01)
@@ -99,7 +99,7 @@ def process_linear_motion(payload):
 def process_wait_directive(payload):
     print(f"Processed wait directive with parameter: {payload}")
 
-    serial.write(f"{payload}\n".encode('utf-8'))
+    serial.write(f"WAIT|{payload}\n".encode('utf-8'))
 
     while serial.in_waiting <= 0:
         time.sleep(0.01)
