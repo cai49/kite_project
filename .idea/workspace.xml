@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated parser_mki.ino&#10;- Added Wait directive support for Stations and delayed execution&#10;- Generalized location&#10;- Added Rotate directive support for right and left&#10;- Added debug preprocessors for final deployment efficiency&#10;- At least for now, sending multiple packages and expecting their timings to work is fixed">
+    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Updated parser_mki.ino&#10;- Added drive routines for 2 consecutive stepper motors. UNTESTED">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arduino/parser_mki/parser_mki.ino" beforeDir="false" afterPath="$PROJECT_DIR$/arduino/parser_mki/parser_mki.ino" afterDir="false" />
     </list>
@@ -132,8 +132,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-PY-241.15989.155" />
-        <option value="bundled-python-sdk-babbdf50b680-7c6932dee5e4-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.15989.155" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.17011.127" />
+        <option value="bundled-python-sdk-48aec45f0201-7e9c3bbb6e34-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.17011.127" />
       </set>
     </attachedChunks>
   </component>
@@ -163,7 +163,9 @@
       <workItem from="1715127259803" duration="623000" />
       <workItem from="1715197137141" duration="4675000" />
       <workItem from="1715258914741" duration="3054000" />
-      <workItem from="1716632886904" duration="5543000" />
+      <workItem from="1716632886904" duration="5940000" />
+      <workItem from="1717095585912" duration="621000" />
+      <workItem from="1717099399967" duration="1691000" />
     </task>
     <task id="LOCAL-00001" summary="Project Creation&#10;- Created main.py which runs the test UI QT app add_items.ui&#10;- Compiled add_items.ui to a python module add_items.py">
       <option name="closed" value="true" />
@@ -261,7 +263,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715263088044</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Updated parser_mki.ino&#10;- Added drive routines for 2 consecutive stepper motors. UNTESTED">
+      <option name="closed" value="true" />
+      <created>1716647924663</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1716647924663</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,10 +312,11 @@
     <MESSAGE value="Updated&#10;- Updated folder structure" />
     <MESSAGE value="Updated&#10;- Updated RPi5 code" />
     <MESSAGE value="Updated parser_mki.ino&#10;- Added Wait directive support for Stations and delayed execution&#10;- Generalized location&#10;- Added Rotate directive support for right and left&#10;- Added debug preprocessors for final deployment efficiency&#10;- At least for now, sending multiple packages and expecting their timings to work is fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated parser_mki.ino&#10;- Added Wait directive support for Stations and delayed execution&#10;- Generalized location&#10;- Added Rotate directive support for right and left&#10;- Added debug preprocessors for final deployment efficiency&#10;- At least for now, sending multiple packages and expecting their timings to work is fixed" />
+    <MESSAGE value="Updated parser_mki.ino&#10;- Added drive routines for 2 consecutive stepper motors. UNTESTED" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated parser_mki.ino&#10;- Added drive routines for 2 consecutive stepper motors. UNTESTED" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kite_project_proto$add_items.coverage" NAME="add_items Coverage Results" MODIFIED="1714202580588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/qtUi" />
-    <SUITE FILE_PATH="coverage/kite_project_proto$main.coverage" NAME="main Coverage Results" MODIFIED="1716636246987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/kite_project_proto$main.coverage" NAME="main Coverage Results" MODIFIED="1717099505545" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
