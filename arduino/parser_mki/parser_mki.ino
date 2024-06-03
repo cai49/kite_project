@@ -30,6 +30,8 @@ const uint8_t r_dir_pin = 8;
 const uint8_t r_en_pin = 9;
 const uint8_t r_pul_pin = 10;
 
+const int MUX = 500;                          // Time between stepper pulses (in us)
+
 /// Sensor Board
 // Status RGB LED
 const uint8_t R_pin = 12;
@@ -43,9 +45,14 @@ const uint8_t S0_pin = A0;    // Right Sensor
 const uint8_t S1_pin = A1;    // Middle Sensor
 const uint8_t S2_pin = A2;    // Left Sensor
 
-const bool S0 = false;
-const bool S1 = false;
-const bool S2 = false;
+bool S0 = false;
+bool S1 = false;
+bool S2 = false;
+
+// Less than this value will indicate dark color
+const int S0_tres = 40;
+const int S1_tres = 300;
+const int S2_tres = 300;
 
 // Serial Directives
 const String wait_directive = "WAIT";
@@ -68,15 +75,21 @@ const int FAST = 200;
 const int NOM = 125;
 const int SLOW = 75;
 const int STOP = 0;
-int drive_speed = NOM;
+int drive_speed = FAST;
+int prev_drive_speed = drive_speed;
 
 // Simple State Machine
 const int IDLE = 0;
 const int DRIVE = 1;
 const int STUCK = 2;
 const int ERROR = 3;
+const int RR = 4;
+const int RL = 5;
 int state = IDLE;
 int prev_state = state;
+
+bool waiting = false;
+int waiting_time = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -100,7 +113,13 @@ void setup() {
 }
 
 void loop() {
-  if (Serial.available() > 0) {
+  if (waiting > 0)
+  {
+    waiting -= 1;
+    delay(1);
+  }
+
+  if (Serial.available() > 0 && !waiting) {
     debugln(Serial.readString());
     msg = Serial.readStringUntil('\n');
 
@@ -116,10 +135,11 @@ void loop() {
     }
     else if (msg == "FORWARD")
     {
+      drive_speed = SLOW;
       state = DRIVE;
-      direction = FORWARD;
+      // direction = FORWARD;
     }
-    else 
+    else
     {
       if(wait_directive == msg.substring(0, wait_directive.length()))
       {
@@ -131,7 +151,8 @@ void loop() {
 
         if(wait_time!=0)
         {
-          delay(wait_time);
+          waiting_time = wait_time;
+          waiting = true;
         }
         else
         {
@@ -145,12 +166,14 @@ void loop() {
         if (direction == "RIGHT") 
         {
           debugln("Turning Right!");
-          rotate(RIGHT);
+          prev_state = state;
+          state = RR;
         }
         else
         {
           debugln("Turning Left!");
-          rotate(LEFT);
+          prev_state = state;
+          state = RL;
         }
       }
       else if (set_speed_directive == msg.substring(0, set_speed_directive.length()))
@@ -178,7 +201,7 @@ void loop() {
 
     // Since RPi5 request a reply, send the processed message.
     Serial.println("Processed message: " + msg);
-    
+      
     // Delay allows the serial buffer to be adequately filled
     delay(100);
   }
@@ -197,11 +220,15 @@ void loop() {
     case DRIVE:
       // Drive to whatever target speed
       drive_state();
+
+      status_led.setColor(RGBLed::GREEN);
       break;
     
     case IDLE:
       // Turn OFF the Motors
       status_led.setColor(RGBLed::BLUE);
+
+      prev_drive_speed = drive_speed;
       drive_speed = STOP;
       break;
     
@@ -210,20 +237,32 @@ void loop() {
       // Wait for 10 seconds before checking if unstuck
       status_led.setColor(255, 165, 0);
 
+      prev_drive_speed = drive_speed;
       drive_speed = STOP;
 
       while (distance < clearance_distance)
       {
-        delay(5000);
-        measure_clearance();              // Update measured distance
+        measure_clearance();              // Update measured distance              
       }
 
+      drive_speed = prev_drive_speed;
       state = prev_state;
+
       break;
 
     case ERROR:
       // Turn OFF the Motors and set status LED to blinking red
       status_led.flash(RGBLed::RED, 250);
+      break;
+    
+    case RR:
+        rotate(RIGHT);
+        state = prev_state;
+      break;
+
+    case RL:
+        rotate(RIGHT);
+        state = prev_state;
       break;
   }
 }
@@ -233,41 +272,67 @@ void drive_state()
   // Ask CNY70 sensors for their state and drive accordingly.
   update_sensors();
 
-  switch (direction)
+  // Drive fully forward
+  if(S1 && (!S0 && !S2))
   {
-    case FORWARD:
       for (int i = 0; i < drive_speed; i++)
       {
-        digitalWrite(l_dir_pin, LOW);
+        digitalWrite(l_dir_pin, HIGH);
         digitalWrite(r_dir_pin, LOW);
         digitalWrite(l_en_pin, HIGH);
         digitalWrite(r_en_pin, HIGH);
         digitalWrite(l_pul_pin, HIGH);
         digitalWrite(r_pul_pin, HIGH);
-        delayMicroseconds(250);
+        delayMicroseconds(500);
         
         digitalWrite(l_pul_pin, LOW);
         digitalWrite(r_pul_pin, LOW);
-        delayMicroseconds(250);
-      }
-      break;
+        delayMicroseconds(500);
 
-    case REVERSE:
-      for (int i = 0; i < drive_speed; i++)
-      {
-        digitalWrite(l_dir_pin, HIGH);
-        digitalWrite(r_dir_pin, HIGH);
-        digitalWrite(l_en_pin, HIGH);
-        digitalWrite(r_en_pin, HIGH);
-        digitalWrite(l_pul_pin, HIGH);
-        digitalWrite(r_pul_pin, HIGH);
-        delayMicroseconds(250);
-        
-        digitalWrite(l_pul_pin, LOW);
-        digitalWrite(r_pul_pin, LOW);
-        delayMicroseconds(250);
+        delay(10);
       }
-      break;
+  }
+  // Follow the line right
+  else if (!S0 && (S1 || S2))
+  {
+
+    for (int i = 0; i < drive_speed/10; i++)
+    {
+      // digitalWrite(l_dir_pin, LOW);
+      digitalWrite(r_dir_pin, LOW);
+      // digitalWrite(l_en_pin, HIGH);
+      digitalWrite(r_en_pin, HIGH);
+      // digitalWrite(l_pul_pin, HIGH);
+      digitalWrite(r_pul_pin, HIGH);
+      delayMicroseconds(MUX);
+      
+      // digitalWrite(l_pul_pin, LOW);
+      digitalWrite(r_pul_pin, LOW);
+      delayMicroseconds(MUX);
+
+      delay(10);
+    }
+    
+  }
+  // Follow the line left
+  else if (!S2 && (S1 || S0))
+  {
+    for (int i = 0; i < drive_speed/10; i++)
+    {
+      digitalWrite(l_dir_pin, HIGH);
+      // digitalWrite(r_dir_pin, HIGH);
+      digitalWrite(l_en_pin, HIGH);
+      // digitalWrite(r_en_pin, HIGH);
+      digitalWrite(l_pul_pin, HIGH);
+      // digitalWrite(r_pul_pin, HIGH);
+      delayMicroseconds(MUX);
+      
+      digitalWrite(l_pul_pin, LOW);
+      // digitalWrite(r_pul_pin, LOW);
+      delayMicroseconds(MUX);
+
+      delay(10);
+    }
   }
 }
 
@@ -275,36 +340,38 @@ void rotate(int dir)
 {
     if (dir == RIGHT)
     {
-      for (int i = 0; i < drive_speed; i++)
+      for (int i = 0; i < drive_speed * 10; i++)
       {
-        digitalWrite(l_dir_pin, LOW);
+        digitalWrite(l_dir_pin, HIGH);
         digitalWrite(r_dir_pin, HIGH);
         digitalWrite(l_en_pin, HIGH);
         digitalWrite(r_en_pin, HIGH);
         digitalWrite(l_pul_pin, HIGH);
         digitalWrite(r_pul_pin, HIGH);
-        delayMicroseconds(250);
+        delayMicroseconds(MUX);
         
         digitalWrite(l_pul_pin, LOW);
         digitalWrite(r_pul_pin, LOW);
-        delayMicroseconds(250);
+        delayMicroseconds(MUX);
+
+        delay(10);
       }
     }
     else if (dir == LEFT)
     {
-      for (int i = 0; i < drive_speed; i++)
+      for (int i = 0; i < drive_speed * 10; i++)
       {
-        digitalWrite(l_dir_pin, HIGH);
+        digitalWrite(l_dir_pin, LOW);
         digitalWrite(r_dir_pin, LOW);
         digitalWrite(l_en_pin, HIGH);
         digitalWrite(r_en_pin, HIGH);
         digitalWrite(l_pul_pin, HIGH);
         digitalWrite(r_pul_pin, HIGH);
-        delayMicroseconds(250);
+        delayMicroseconds(MUX);
         
         digitalWrite(l_pul_pin, LOW);
         digitalWrite(r_pul_pin, LOW);
-        delayMicroseconds(250);
+        delayMicroseconds(MUX);
       }
     }
 }
@@ -314,13 +381,32 @@ void measure_clearance()
   double* ds = HCSR04.measureDistanceCm();
   distance = ds[0];
 
-  debug("1: ");
-  debug(distance);
-  debugln(" cm");
-  debugln("---");
+  // debug("1: ");
+  // debug(distance);
+  // debugln(" cm");
+  // debugln("---");
 }
 
 void update_sensors()
 {
+  int curr_s0 = analogRead(S0_pin);
+  int curr_s1 = analogRead(S1_pin);
+  int curr_s2 = analogRead(S2_pin);
 
+  S0 = curr_s0 < S0_tres;
+  S1 = curr_s1 < S1_tres;
+  S2 = curr_s2 < S2_tres;
+
+  // debugln("R: " + String(S0));
+  // debugln("M: " + String(S1));
+  // debugln("L: " + String(S2));
+
+  // debug("R: ");
+  // debugln(curr_s0);
+
+  // debug("M: ");
+  // debugln(curr_s1);
+
+  // debug("L: ");
+  // debugln(curr_s2);
 }
