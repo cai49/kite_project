@@ -88,12 +88,13 @@ const int RL = 5;
 int state = IDLE;
 int prev_state = state;
 
-bool waiting = false;
-int waiting_time = 0;
+bool waiting = true;
+int waiting_time = 100;
 
 void setup() {
   Serial.begin(115200);
   while(!Serial) {}
+  Serial.flush();
 
   HCSR04.begin(trigger_pin, echo_pin);
 
@@ -113,10 +114,16 @@ void setup() {
 }
 
 void loop() {
-  if (waiting > 0)
+  if (waiting)
   {
-    waiting -= 1;
-    delay(1);
+    waiting_time -= 1;
+
+    if (waiting_time <= 0)
+    {
+      waiting = false;
+    }
+    
+    debugln(waiting_time);
   }
 
   if (Serial.available() > 0 && !waiting) {
@@ -289,14 +296,14 @@ void drive_state()
         digitalWrite(r_pul_pin, LOW);
         delayMicroseconds(500);
 
-        delay(10);
+        delay(5);
       }
   }
   // Follow the line right
   else if (!S0 && (S1 || S2))
   {
 
-    for (int i = 0; i < drive_speed/10; i++)
+    for (int i = 0; i < drive_speed/5; i++)
     {
       // digitalWrite(l_dir_pin, LOW);
       digitalWrite(r_dir_pin, LOW);
@@ -310,14 +317,14 @@ void drive_state()
       digitalWrite(r_pul_pin, LOW);
       delayMicroseconds(MUX);
 
-      delay(10);
+      delay(5);
     }
     
   }
   // Follow the line left
   else if (!S2 && (S1 || S0))
   {
-    for (int i = 0; i < drive_speed/10; i++)
+    for (int i = 0; i < drive_speed/5; i++)
     {
       digitalWrite(l_dir_pin, HIGH);
       // digitalWrite(r_dir_pin, HIGH);
@@ -331,8 +338,27 @@ void drive_state()
       // digitalWrite(r_pul_pin, LOW);
       delayMicroseconds(MUX);
 
-      delay(10);
+      delay(5);
     }
+  }
+  else 
+  {
+    for (int i = 0; i < drive_speed; i++)
+      {
+        digitalWrite(l_dir_pin, HIGH);
+        digitalWrite(r_dir_pin, LOW);
+        digitalWrite(l_en_pin, HIGH);
+        digitalWrite(r_en_pin, HIGH);
+        digitalWrite(l_pul_pin, HIGH);
+        digitalWrite(r_pul_pin, HIGH);
+        delayMicroseconds(500);
+        
+        digitalWrite(l_pul_pin, LOW);
+        digitalWrite(r_pul_pin, LOW);
+        delayMicroseconds(500);
+
+        delay(5);
+      }
   }
 }
 
@@ -340,7 +366,7 @@ void rotate(int dir)
 {
     if (dir == RIGHT)
     {
-      for (int i = 0; i < drive_speed * 10; i++)
+      for (int i = 0; i < drive_speed * 2; i++)
       {
         digitalWrite(l_dir_pin, HIGH);
         digitalWrite(r_dir_pin, HIGH);
@@ -354,12 +380,12 @@ void rotate(int dir)
         digitalWrite(r_pul_pin, LOW);
         delayMicroseconds(MUX);
 
-        delay(10);
+        delay(5);
       }
     }
     else if (dir == LEFT)
     {
-      for (int i = 0; i < drive_speed * 10; i++)
+      for (int i = 0; i < drive_speed * 2; i++)
       {
         digitalWrite(l_dir_pin, LOW);
         digitalWrite(r_dir_pin, LOW);
@@ -372,6 +398,8 @@ void rotate(int dir)
         digitalWrite(l_pul_pin, LOW);
         digitalWrite(r_pul_pin, LOW);
         delayMicroseconds(MUX);
+
+        delay(5);
       }
     }
 }
