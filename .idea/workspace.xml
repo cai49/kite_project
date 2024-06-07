@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Finished Prototype Project&#10;- No locate was implemented&#10;- Waiting routine still untested">
+    <list default="true" id="742bab81-280d-441a-a6f9-2c5db839f1ea" name="Changes" comment="Finished Prototype Project&#10;- No locate was implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arduino/parser_mki/parser_mki.ino" beforeDir="false" afterPath="$PROJECT_DIR$/arduino/parser_mki/parser_mki.ino" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +170,8 @@
       <workItem from="1717425965222" duration="72000" />
       <workItem from="1717460209225" duration="344000" />
       <workItem from="1717468168644" duration="440000" />
-      <workItem from="1717468899200" duration="2073000" />
+      <workItem from="1717468899200" duration="2387000" />
+      <workItem from="1717550266202" duration="63000" />
     </task>
     <task id="LOCAL-00001" summary="Project Creation&#10;- Created main.py which runs the test UI QT app add_items.ui&#10;- Compiled add_items.ui to a python module add_items.py">
       <option name="closed" value="true" />
@@ -293,7 +293,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717426008275</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Finished Prototype Project&#10;- No locate was implemented">
+      <option name="closed" value="true" />
+      <created>1717471333655</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1717471333655</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +345,8 @@
     <MESSAGE value="Updated parser_mki.ino&#10;- Added drive routines for 2 consecutive stepper motors. UNTESTED" />
     <MESSAGE value="Updated parser_mki.ino&#10;- Added sensor board configuration&#10;- Added state machine" />
     <MESSAGE value="Finished Prototype Project&#10;- No locate was implemented&#10;- Waiting routine still untested" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Prototype Project&#10;- No locate was implemented&#10;- Waiting routine still untested" />
+    <MESSAGE value="Finished Prototype Project&#10;- No locate was implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished Prototype Project&#10;- No locate was implemented" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/kite_project_proto$add_items.coverage" NAME="add_items Coverage Results" MODIFIED="1714202580588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/qtUi" />
